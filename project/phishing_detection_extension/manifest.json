@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Phishing Detection Extension",
+    "version": "1.0",
+    "description": "Detect phishing URLs in real-time.",
+    "permissions": ["activeTab", "scripting"],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+    }
+  }
+  

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detection & Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .active-tab {
+            border-bottom: 2px solid #fbbf24; /* Yellow border for active tab */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-gray-800 text-white py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center">
+                <div class="text-2xl font-bold">PHISHING DETECTION</div>
+                <ul class="flex space-x-4">
+                    <li><a href="#" id="homeLink" class="active-tab" onclick="showPage('home')">HOME</a></li>
+                    <li><a href="#" id="reportLink" onclick="showPage('report')">REPORT URL</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">LOGIN</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="homePage" class="container mx-auto px-4 py-4">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold mb-4">Stay One Step Ahead of Phishing Scams!</h1>
+            <p class="text-lg mb-6">Identify suspicious URLs and safeguard your personal information with our tool.</p>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6HAgJ-koPsc-mHhOVpF1OQ6KY55imTEdpqpDUgIQpVHpRDctDxUzRPnvpihXz80eNeRw&usqp=CAU" alt="Phishing Account Animation" class="mx-auto mt-5 w-3/4 max-h-42 md:w-1/4">
+        </div>
+        <div class="mt-16 flex justify-center">
+            <input type="text" id="urlInput" placeholder="Enter website address or URL (e.g. www.Tesla.com)"
+                class="border border-gray-300 p-3 rounded w-full md:w-1/2 text-center">
+            <button id="scanButton" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded ml-4"
+                onclick="scanUrl()">SCAN URL</button>
+        </div>
+        <div id="result" class="mt-8 text-center"></div>
+    </section>
+
+    <!-- Report URL Section -->
+    <section id="reportPage" class="container mx-auto px-4 py-4 hidden">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold mb-4">Report a Suspicious Site</h2>
+            <p class="text-lg mb-6">Report any suspicious URLs hosting phishing content, distributing malware, or
+                engaging in malicious activities.</p>
+        </div>
+        
+        <!-- Report Type Selection -->
+        <div class="mb-4 text-center">
+            <label class="text-gray-700 font-bold mr-4">Report Type:</label>
+            <label><input type="radio" name="reportType" value="bulk" class="mr-2" onclick="toggleForm('bulk')">Report in Bulk</label>
+            <label class="ml-4"><input type="radio" name="reportType" value="anonymous" class="mr-2" onclick="toggleForm('anonymous')" checked>Report Anonymously</label>
+        </div>
+
+        <!-- Bulk Report Form -->
+        <form id="bulkForm" class="max-w-xl mx-auto hidden">
+            <div class="mb-4">
+                <label for="bulkUrls" class="block text-gray-700 mb-2">Enter URLs (one per line):</label>
+                <textarea id="bulkUrls" name="bulkUrls" class="border border-gray-300 p-3 rounded w-full" rows="5"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="bulkAdditionalInfo" class="block text-gray-700 mb-2">Additional URL details (optional):</label>
+                <textarea id="bulkAdditionalInfo" name="bulkAdditionalInfo" class="border border-gray-300 p-3 rounded w-full" rows="4" placeholder="Any additional details about the URLs"></textarea>
+            </div>
+            <div class="flex justify-center mb-6">
+                <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded">
+                    Submit Bulk Report
+                </button>
+            </div>
+        </form>
+
+        <!-- Anonymous Report Form (default display) -->
+        <form id="anonymousForm" class="max-w-xl mx-auto">
+            <div class="mb-4">
+                <label for="url" class="block text-gray-700 mb-2">Enter URL of the site:</label>
+                <input type="text" id="url" name="url" class="border border-gray-300 p-3 rounded w-full" required>
+            </div>
+            <div class="mb-4">
+                <label for="category" class="block text-gray-700 mb-2">Select category:</label>
+                <select id="category" name="category" class="border border-gray-300 p-3 rounded w-full">
+                    <option value="">Select a category</option>
+                    <option value="phishing">Phishing</option>
+                    <option value="malware">Malware</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="source" class="block text-gray-700 mb-2">Source of URL (optional):</label>
+                <input type="text" id="source" name="source" class="border border-gray-300 p-3 rounded w-full">
+            </div>
+            <div class="mb-6">
+                <label for="details" class="block text-gray-700 mb-2">Additional URL details (optional):</label>
+                <textarea id="details" name="details" class="border border-gray-300 p-3 rounded w-full"></textarea>
+            </div>
+            <div class="flex justify-center">
+                <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded">
+                    Submit Anonymous Report
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-4 mt-10">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Phishing Detection. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
